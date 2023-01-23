@@ -26,30 +26,37 @@ class DadosUsuarioController extends Controller
         if ($arrayCep[0]) {
             $cepString = implode(':', $arrayCep);
 
+            $requestViaCep = Http::get('viacep.com.br/ws/' . $cepString . '//json/');
+
+            dd($requestViaCep);
+
+            $corpo = $requestViaCep->object();
+
             // $client = new Client();
             // $response = $client->request('GET', 'viacep.com.br/ws/07262218/json/');
             // $response = $client->request('GET', 'viacep.com.br/ws/' . $cepString . '//json/');
             // $retorno = $client->send($response);
             // $corpo = json_decode($response->getBody());
 
-            // $dadosCadastro->nome = $request->name;
-            // $dadosCadastro->idade = $request->age;
-            // $dadosCadastro->email = $request->email;
-            // $dadosCadastro->tell = $request->tell;
-            // $dadosCadastro->cep = $request->cep;
+            $dadosCadastro->nome = $request->name;
+            $dadosCadastro->idade = $request->age;
+            $dadosCadastro->email = $request->email;
+            $dadosCadastro->tell = $request->tell;
+            $dadosCadastro->cep = $request->cep;
 
-            // $dadosCadastro->ddd = $request->ddd ? $request->ddd : '';
-            // $dadosCadastro->localizacao = $request->localizacao ? $request->localizacao : '';
-            // $dadosCadastro->uf = $request->uf ? $request->uf : '';
-            // $dadosCadastro->rua = $request->rua ? $request->rua : '';
-            // $dadosCadastro->bairro = $request->bairro ? $request->bairro : '';
+            $dadosCadastro->ddd = $request->ddd ? $request->ddd : '';
+            $dadosCadastro->localizacao = $request->localizacao ? $request->localizacao : '';
+            $dadosCadastro->uf = $request->uf ? $request->uf : '';
+            $dadosCadastro->rua = $request->rua ? $request->rua : '';
+            $dadosCadastro->bairro = $request->bairro ? $request->bairro : '';
+
+            $corpo->nome = $request->name ?  $request->name : '';
+            $corpo->idade = $request->age ?  $request->age : '';
+            $corpo->email = $request->email ?  $request->email : '';
+            $corpo->tell = $request->tell ?  $request->tell : '';
+            $corpo->cep = $request->cep ? $request->cep : '';
 
             // return view('welcome', ['corpo' => $corpo]);
-
-            $requestViaCep = Http::get('viacep.com.br/ws/' . $cepString . '//json/');
-
-
-            $corpo = $requestViaCep->object();
 
             // return
 
@@ -58,8 +65,11 @@ class DadosUsuarioController extends Controller
                 'data' => $corpo
             ]);
 
-            return view('welcome', ['response' => $response, 'corpo' => $corpo]);
-            // $dadosCadastro->save();
+            // return view('welcome', ['response' => $response, 'corpo' => $corpo]);
+
+            $dadosCadastro->save();
+
+            return view('welcome', ['corpo' => $corpo]);
         } else {
             $corpo = '';
 

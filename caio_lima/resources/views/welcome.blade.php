@@ -23,56 +23,56 @@
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-4">
                         <label for="name">Nome:</label>
-                        <input class="form-control" type="text" id="name" name="name" placeholder="">
+                        <input class="form-control" type="text" id="name" name="name" placeholder="" value="{{ $corpo ? $corpo->nome : '' }}">
                     </div>
                     <div class="col-sm-3 col-md-4 col-lg-4">
                         <label for="idade">Idade: </label>
-                        <input class="form-control" type="text" id="idade" name="age">
+                        <input class="form-control" type="text" id="idade" name="age"  value="{{ $corpo ? $corpo->idade : '' }}">
                     </div>
                     <div class="col-sm-4 col-md-4 col-lg-4">
                         <label for="email">Email: </label>
-                        <input class="form-control" type="email" id="email" name="email" placeholder="exemplo@exemplos.com.br">
+                        <input class="form-control" type="email" id="email" name="email" placeholder="exemplo@exemplos.com.br"  value="{{ $corpo ? $corpo->email : '' }}">
                     </div>
                     <div class="col-sm-5 col-md-4 col-lg-4">
                         <label for="tell">Telefone: </label>
-                        <input class="form-control" type="tel" id="tell" name="tell" placeholder="XXXX-XXXX">
+                        <input class="form-control" type="tel" id="tell" name="tell" placeholder="XXXX-XXXX"  value="{{ $corpo ? $corpo->tell : '' }}">
                     </div>
                     <div class="col-sm-5 col-md-4 col-lg-4">
                         <label for="cep">CEP: </label>
-                        <input class="form-control" type="number" id="cep" name="cep">
+                        <input class="form-control" type="number" id="cep" name="cep"  value="{{ $corpo ? $corpo->cep : '' }}">
                     </div>
                     <!-- Caso a variavel corpo for verdade preencher campo -->
                     @if($corpo)
-                    <div class="col-sm-2 col-md-2 col-lg-2">
-                        <label for="ddd">DDD: </label>
-                        <input class="form-control" type="number" id="ddd" name="ddd" placeholder="(XX)" value="{{ $corpo->ddd}}">
-                    </div>
-                    <div class="col-sm-2 col-md-2 col-lg-2">
-                        <label for="uf">UF: </label>
-                        <input class="form-control" type="text" id="uf" name="uf" placeholder="XX" value="{{ $corpo->uf}}">
-                    </div>
-                    <div class="col-sm-5 col-md-4 col-lg-4">
-                        <label for="localizacao">Cidade: </label>
-                        <input class="form-control" type="text" id="localizacao" name="localizacao" value="{{ $corpo->localidade }}">
-                    </div>
-                    <div class="col-sm-5 col-md-5 col-lg-4">
-                        <label for="rua">Rua: </label>
-                        <input class="form-control" type="text" id="rua" name="rua" value="{{ $corpo->logradouro }}">
-                    </div>
-                    <div class="col-sm-6 col-md-3 col-lg-4">
-                        <label for="bairro">Bairro: </label>
-                        <input class="form-control" type="text" id="bairro" name="bairro" value="{{ $corpo->bairro }}">
-                    </div>
-                    <!-- Caso a requisição seja nula devido ao tempo comprencher com um campo vazio -->
-                    @else
-                    <div class="col-sm-12 col-md-5 col-lg-4">
-                        <label for="rua">Rua: </label>
-                        <input class="form-control" type="text" id="rua" name="rua" value="">
-                    </div>
-                    <div class="col-sm-12 col-md-3 col-lg-4">
-                        <label for="bairro">Bairro: </label>
-                        <input class="form-control" type="text" id="bairro" name="bairro" value="">
-                    </div>
+                        <div class="col-sm-2 col-md-2 col-lg-2">
+                            <label for="ddd">DDD: </label>
+                            <input class="form-control" type="number" id="ddd" name="ddd" placeholder="(XX)" value="{{ $corpo->ddd}}">
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-lg-2">
+                            <label for="uf">UF: </label>
+                            <input class="form-control" type="text" id="uf" name="uf" placeholder="XX" value="{{ $corpo->uf}}">
+                        </div>
+                        <div class="col-sm-5 col-md-4 col-lg-4">
+                            <label for="localizacao">Cidade: </label>
+                            <input class="form-control" type="text" id="localizacao" name="localizacao" value="{{ $corpo->localidade }}">
+                        </div>
+                        <div class="col-sm-5 col-md-5 col-lg-4">
+                            <label for="rua">Rua: </label>
+                            <input class="form-control" type="text" id="rua" name="rua" value="{{ $corpo->logradouro }}">
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-4">
+                            <label for="bairro">Bairro: </label>
+                            <input class="form-control" type="text" id="bairro" name="bairro" value="{{ $corpo->bairro }}">
+                        </div>
+                        <!-- Caso a requisição seja nula devido ao tempo comprencher com um campo vazio -->
+                        @else
+                        <div class="col-sm-12 col-md-5 col-lg-4">
+                            <label for="rua">Rua: </label>
+                            <input class="form-control" type="text" id="rua" name="rua" value="">
+                        </div>
+                        <div class="col-sm-12 col-md-3 col-lg-4">
+                            <label for="bairro">Bairro: </label>
+                            <input class="form-control" type="text" id="bairro" name="bairro" value="">
+                        </div>
                     @endif
                 </div>
                 <!-- Botao de envio -->
@@ -85,16 +85,10 @@
 
         </form>
 
-        {{ dd($response)}}
-
         @if($corpo)
-        <br> {{ $corpo->logradouro }}
-        <br> {{ $corpo->bairro }}
-        <br> {{ $corpo->localidade }}
-        <br> {{ $corpo->uf }}
-        <br> {{ $corpo->ddd }}
+            Cadastro realizado com sucesso !
         @else
-        {{ $mensagemErro }}
+            {{ $mensagemErro }}
         @endif
 
     </div>
