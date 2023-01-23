@@ -28,9 +28,13 @@ class DadosUsuarioController extends Controller
 
             $requestViaCep = Http::get('viacep.com.br/ws/' . $cepString . '//json/');
 
-            dd($requestViaCep);
+            if(!$requestViaCep) {
+                dd('xau');
+            }
 
             $corpo = $requestViaCep->object();
+
+            // dd($corpo);
 
             // $client = new Client();
             // $response = $client->request('GET', 'viacep.com.br/ws/07262218/json/');
